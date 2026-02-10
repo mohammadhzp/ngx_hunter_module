@@ -1,0 +1,49 @@
+ngx_addon_name="ngx_hunter_module"
+disable_hunter_http="YES"
+disable_hunter_stream="NO"
+STREAM_SRC="$ngx_addon_dir/ngx_stream_hunter_module.c"
+HTTP_SRC="$ngx_addon_dir/ngx_http_hunter_module.c"
+
+if [ $ngx_module_link = DYNAMIC ] ; then
+    if [ $disable_hunter_http != YES ]; then
+        if [ $HTTP != NO ]; then
+            ngx_module_name="$ngx_module_name ngx_http_hunter_module"
+            ngx_module_srcs=$HTTP_SRC
+            #ngx_module_libs=$LIBS
+        fi
+    fi
+
+    if [ $disable_hunter_stream != YES ]; then
+        if [ $STREAM != NO ]; then
+            ngx_module_name="$ngx_module_name ngx_stream_hunter_module"
+            ngx_module_srcs=$STREAM_SRC
+            #ngx_module_libs=$LIBS
+        fi
+    fi
+
+    . auto/module
+
+else
+
+    if [ $disable_hunter_http != YES ]; then
+        if [ $HTTP != NO ]; then
+            ngx_module_type=HTTP
+            ngx_module_name=ngx_http_hunter_module
+            ngx_module_srcs=$HTTP_SRC
+            #ngx_module_libs=$LIBS
+
+            . auto/module
+        fi
+    fi
+
+    if [ $disable_hunter_stream != YES ]; then
+        if [ $STREAM != NO ]; then
+            ngx_module_type=STREAM
+            ngx_module_name=ngx_stream_hunter_module
+            ngx_module_srcs=$STREAM_SRC
+            #ngx_module_libs=$LIBS
+
+            . auto/module
+        fi
+    fi
+fi
