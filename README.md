@@ -184,3 +184,7 @@ With this configuration, every TCP connection to port **8892** is checked agains
 ## Development
 
 See [DEVELOP.md](DEVELOP.md) for instructions on setting up a local debug Nginx build, compiling with or without the module, and running the utility scripts.
+
+
+## Help
+If you have issues up and running the current module or need hints how to efficiently run it, send me an email.
